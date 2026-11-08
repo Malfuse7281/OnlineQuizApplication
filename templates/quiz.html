@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Take Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Online Quiz</h1>
+    <h3>Welcome {{ name }}!</h3>
+
+    <form action="/result" method="POST">
+        <input type="hidden" name="username" value="{{ name }}">
+
+        {% for q in questions %}
+        <div class="question">
+            <h3>{{ loop.index }}. {{ q[1] }}</h3>
+
+            {% for option in q[2:6] %}
+            <label>
+                <input type="radio" name="{{ q[0] }}" value="{{ option }}" required>
+                {{ option }}
+            </label>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <button type="submit">Submit Quiz</button>
+    </form>
+</div>
+</body>
+</html>

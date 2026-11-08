@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Quiz Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Online Quiz Application</h1>
+    <p>Welcome! Test your knowledge with our quiz.</p>
+    <p>Total Questions: 5</p>
+    <form action="/quiz" method="POST">
+        <input type="text" name="username" placeholder="Enter your name" required>
+        <button type="submit">Start Quiz</button>
+    </form>
+</div>
+</body>
+</html>
