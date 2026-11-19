@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,14 +7,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div class="container">
-    <h1>Quiz Completed!</h1>
-    <h2>Congratulations {{ name }}!</h2>
-    <h1>Your Score: {{ score }} / {{ total }}</h1>
+    <div class="container">
+        <h1>Quiz Completed!</h1>
+        <h2>Congratulations, {{ name }}!</h2>
 
-    <p>Thank you for participating.</p>
+        <h3>Your Score: {{ score }} / {{ total }}</h3>
 
-    <a href="/"><button>Take Quiz Again</button></a>
-</div>
+        <a href="{{ url_for('quiz') }}">
+            <button>Try Again</button>
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            <button>Logout</button>
+        </a>
+    </div>
 </body>
 </html>

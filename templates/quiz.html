@@ -2,32 +2,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Take Quiz</title>
+    <title>Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div class="container">
-    <h1>Online Quiz</h1>
-    <h3>Welcome {{ name }}!</h3>
+    <div class="container">
+        <h1>Welcome, {{ name }}!</h1>
+        <h2>Answer the following questions</h2>
 
-    <form action="/result" method="POST">
-        <input type="hidden" name="username" value="{{ name }}">
+        <form action="{{ url_for('result') }}" method="POST">
+            {% for q in questions %}
+                <div class="question">
+                    <p><b>{{ loop.index }}. {{ q[1] }}</b></p>
 
-        {% for q in questions %}
-        <div class="question">
-            <h3>{{ loop.index }}. {{ q[1] }}</h3>
-
-            {% for option in q[2:6] %}
-            <label>
-                <input type="radio" name="{{ q[0] }}" value="{{ option }}" required>
-                {{ option }}
-            </label>
+                    <label><input type="radio" name="{{ q[0] }}" value="{{ q[2] }}" required> {{ q[2] }}</label><br>
+                    <label><input type="radio" name="{{ q[0] }}" value="{{ q[3] }}"> {{ q[3] }}</label><br>
+                    <label><input type="radio" name="{{ q[0] }}" value="{{ q[4] }}"> {{ q[4] }}</label><br>
+                    <label><input type="radio" name="{{ q[0] }}" value="{{ q[5] }}"> {{ q[5] }}</label><br>
+                </div>
             {% endfor %}
-        </div>
-        {% endfor %}
 
-        <button type="submit">Submit Quiz</button>
-    </form>
-</div>
+            <button type="submit">Submit Quiz</button>
+        </form>
+
+        <p><a href="{{ url_for('logout') }}">Logout</a></p>
+    </div>
 </body>
 </html>
