@@ -1,69 +1,265 @@
 
-body {
-    font-family: Arial, sans-serif;
-    background: #eef2f7;
+/* ---------------- GLOBAL ---------------- */
+
+* {
+    box-sizing: border-box;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a, #172554, #312e81);
+    color: #1e293b;
+    padding: 40px 20px;
 }
 
 .container {
-    width: 90%;
-    max-width: 450px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 45px 40px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
     text-align: center;
 }
 
+/* ---------------- HEADINGS ---------------- */
+
 h1 {
-    color: #243b55;
+    font-size: 32px;
+    color: #172554;
+    margin-bottom: 28px;
+    font-weight: 700;
 }
 
-h2, h3 {
-    color: #334e68;
+h2 {
+    color: #1e293b;
+    margin-bottom: 20px;
 }
 
-input:not([type="radio"]), select {
-    width: 90%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
+h3 {
+    margin-bottom: 12px;
+    color: #334155;
 }
 
-input[type="radio"] {
-    margin: 8px;
+p {
+    margin: 15px 0;
+    font-size: 16px;
+    line-height: 1.6;
 }
+
+/* ---------------- INPUTS ---------------- */
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 15px 17px;
+    margin: 12px 0;
+    border: 1px solid #dbe2ea;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+    background: #f8fafc;
+    color: #1e293b;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #6366f1;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+/* ---------------- BUTTONS ---------------- */
 
 button {
-    padding: 12px 20px;
-    background: #315efb;
-    color: white;
+    padding: 14px 26px;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    margin: 8px;
+    transition: 0.3s;
+    margin: 12px 5px;
 }
 
 button:hover {
-    background: #2448c5;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
 }
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* ---------------- LINKS ---------------- */
 
 a {
-    color: #315efb;
+    color: #4f46e5;
     text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
-.message {
-    color: #d35400;
-    font-weight: bold;
+a:hover {
+    color: #312e81;
+    text-decoration: underline;
 }
 
-hr {
-    margin: 30px 0;
-    border: 0;
-    border-top: 1px solid #ddd;
+/* ---------------- FORMS ---------------- */
+
+form {
+    margin: 20px 0;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #334155;
+}
+
+/* ---------------- QUIZ ---------------- */
+
+.question {
+    text-align: left;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 22px;
+    border-radius: 16px;
+    margin: 20px 0;
+}
+
+.question p {
+    font-weight: 600;
+}
+
+input[type="radio"] {
+    width: auto;
+    margin: 10px;
+    accent-color: #4f46e5;
+}
+
+.timer {
+    background: #eef2ff;
+    color: #4338ca;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* ---------------- TABLES ---------------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th {
+    background: #312e81;
+    color: white;
+    padding: 14px;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+tr:hover {
+    background: #f8fafc;
+}
+
+/* ---------------- FLASH MESSAGES ---------------- */
+
+.message,
+.flash {
+    padding: 14px;
+    border-radius: 12px;
+    background: #eef2ff;
+    color: #3730a3;
+    margin: 15px 0;
+}
+
+/* ---------------- DASHBOARDS ---------------- */
+
+.dashboard {
+    max-width: 1100px;
+}
+
+.card {
+    background: #f8fafc;
+    padding: 25px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    padding: 10px 0;
+}
+
+/* ---------------- RESULT ---------------- */
+
+.result {
+    background: #eef2ff;
+    border-radius: 18px;
+    padding: 30px;
+    margin: 20px 0;
+}
+
+.score {
+    font-size: 42px;
+    color: #4f46e5;
+    font-weight: 800;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .container {
+        margin: 25px auto;
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 15px;
+    }
+
+    table {
+        font-size: 14px;
+    }
 }
