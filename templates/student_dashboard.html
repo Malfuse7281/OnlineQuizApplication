@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container" style="max-width:900px;">
+    <h1>Student Dashboard</h1>
+    <h2>Welcome, {{ session['name'] }}!</h2>
+    <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+
+    <hr>
+
+    <h2>Available Subjects & Quizzes</h2>
+
+    {% for subject in subjects %}
+        <h3>{{ subject.name }}</h3>
+
+        {% for quiz in subject.quizzes %}
+            <p>
+                {{ quiz.title }} |
+                {{ quiz.questions|length }} questions |
+                {{ quiz.duration }} minutes
+                <a href="{{ url_for('take_quiz', id=quiz.id) }}">
+                    <button>Take Quiz</button>
+                </a>
+            </p>
+        {% else %}
+            <p>No quizzes available in this subject.</p>
+        {% endfor %}
+    {% else %}
+        <p>No subjects available yet.</p>
+    {% endfor %}
+
+    <hr>
+
+    <h2>My Quiz History</h2>
+    {% for attempt in attempts %}
+        <p>
+            {{ attempt.quiz.title }} -
+            Score: {{ attempt.score }}/{{ attempt.total }} -
+            {{ attempt.attempted_at.strftime('%d-%m-%Y %H:%M') }}
+        </p>
+    {% else %}
+        <p>You haven't attempted any quizzes yet.</p>
+    {% endfor %}
+</div>
+</body>
+</html>

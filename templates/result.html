@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,19 +6,35 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Quiz Completed!</h1>
-        <h2>Congratulations, {{ name }}!</h2>
+<div class="container">
+    <h1>Quiz Completed!</h1>
 
-        <h3>Your Score: {{ score }} / {{ total }}</h3>
+    <h2>{{ quiz.title }}</h2>
 
-        <a href="{{ url_for('quiz') }}">
-            <button>Try Again</button>
-        </a>
+    <h1>{{ score }} / {{ total }}</h1>
 
-        <a href="{{ url_for('logout') }}">
-            <button>Logout</button>
-        </a>
-    </div>
+    <p>
+        {% if total > 0 %}
+            Your percentage:
+            {{ ((score / total) * 100)|round(2) }}%
+        {% endif %}
+    </p>
+
+    {% if score == total %}
+        <p>Excellent! You answered all questions correctly.</p>
+    {% elif score > 0 %}
+        <p>Good job! Keep practicing.</p>
+    {% else %}
+        <p>Don't worry. Try again and improve your score.</p>
+    {% endif %}
+
+    <a href="{{ url_for('student_dashboard') }}">
+        <button>Back to Dashboard</button>
+    </a>
+
+    <a href="{{ url_for('logout') }}">
+        <button>Logout</button>
+    </a>
+</div>
 </body>
 </html>

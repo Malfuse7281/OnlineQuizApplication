@@ -1,0 +1,122 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container" style="max-width:900px;">
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, {{ session['name'] }}</p>
+    <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <p class="message">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <hr>
+
+    <h2>Add Subject</h2>
+    <form action="{{ url_for('add_subject') }}" method="POST">
+        <input name="name" placeholder="Subject name" required>
+        <input name="description" placeholder="Description">
+        <button type="submit">Add Subject</button>
+    </form>
+
+    <h2>Subjects</h2>
+    {% for subject in subjects %}
+        <p>
+            <strong>{{ subject.name }}</strong>
+            <a href="{{ url_for('delete_subject', id=subject.id) }}">Delete</a>
+        </p>
+    {% else %}
+        <p>No subjects added yet.</p>
+    {% endfor %}
+
+    <hr>
+
+    <h2>Create Quiz</h2>
+    <form action="{{ url_for('add_quiz') }}" method="POST">
+        <input name="title" placeholder="Quiz title" required>
+
+        <select name="subject_id" required>
+            <option value="">Select Subject</option>
+            {% for subject in subjects %}
+                <option value="{{ subject.id }}">{{ subject.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="duration" placeholder="Duration in minutes"
+               min="1" value="10" required>
+        <button type="submit">Create Quiz</button>
+    </form>
+
+    <h2>Existing Quizzes</h2>
+    {% for quiz in quizzes %}
+        <p>
+            <strong>{{ quiz.title }}</strong> -
+            {{ quiz.subject.name }} ({{ quiz.duration }} minutes)
+            <a href="{{ url_for('delete_quiz', id=quiz.id) }}">Delete</a>
+        </p>
+    {% else %}
+        <p>No quizzes created yet.</p>
+    {% endfor %}
+
+    <hr>
+
+    <h2>Add Question</h2>
+    <form action="{{ url_for('add_question') }}" method="POST">
+        <select name="quiz_id" required>
+            <option value="">Select Quiz</option>
+            {% for quiz in quizzes %}
+                <option value="{{ quiz.id }}">{{ quiz.title }}</option>
+            {% endfor %}
+        </select>
+
+        <input name="question_text" placeholder="Question" required>
+        <input name="option1" placeholder="Option A" required>
+        <input name="option2" placeholder="Option B" required>
+        <input name="option3" placeholder="Option C" required>
+        <input name="option4" placeholder="Option D" required>
+
+        <select name="correct_option" required>
+            <option value="">Correct Option</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
+
+        <button type="submit">Add Question</button>
+    </form>
+
+    <h2>Existing Questions</h2>
+    {% for question in questions %}
+        <p>
+            {{ question.question_text }}
+            <a href="{{ url_for('delete_question', id=question.id) }}">Delete</a>
+        </p>
+    {% else %}
+        <p>No questions added yet.</p>
+    {% endfor %}
+
+    <hr>
+
+    <h2>Student Quiz Attempts</h2>
+    {% for attempt in attempts %}
+        <p>
+            {{ attempt.user.name }} -
+            {{ attempt.quiz.title }} -
+            {{ attempt.score }}/{{ attempt.total }} -
+            {{ attempt.attempted_at.strftime('%d-%m-%Y %H:%M') }}
+        </p>
+    {% else %}
+        <p>No attempts recorded yet.</p>
+    {% endfor %}
+</div>
+</body>
+</html>

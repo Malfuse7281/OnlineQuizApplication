@@ -2,30 +2,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Quiz</title>
+    <title>{{ quiz.title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome, {{ name }}!</h1>
-        <h2>Answer the following questions</h2>
+<div class="container" style="max-width:800px;">
+    <h1>{{ quiz.title }}</h1>
+    <h3>Time: <span id="timer" data-duration="{{ quiz.duration }}">{{ quiz.duration }}:00</span></h3>
 
-        <form action="{{ url_for('result') }}" method="POST">
-            {% for q in questions %}
-                <div class="question">
-                    <p><b>{{ loop.index }}. {{ q[1] }}</b></p>
+    <form id="quizForm" action="{{ url_for('submit_quiz', id=quiz.id) }}" method="POST">
+        {% for question in questions %}
+            <div style="text-align:left;margin:25px 0;">
+                <h3>{{ loop.index }}. {{ question.question_text }}</h3>
 
-                    <label><input type="radio" name="{{ q[0] }}" value="{{ q[2] }}" required> {{ q[2] }}</label><br>
-                    <label><input type="radio" name="{{ q[0] }}" value="{{ q[3] }}"> {{ q[3] }}</label><br>
-                    <label><input type="radio" name="{{ q[0] }}" value="{{ q[4] }}"> {{ q[4] }}</label><br>
-                    <label><input type="radio" name="{{ q[0] }}" value="{{ q[5] }}"> {{ q[5] }}</label><br>
-                </div>
-            {% endfor %}
+                <label>
+                    <input type="radio" name="{{ question.id }}" value="A" required>
+                    A. {{ question.option1 }}
+                </label><br>
 
-            <button type="submit">Submit Quiz</button>
-        </form>
+                <label>
+                    <input type="radio" name="{{ question.id }}" value="B">
+                    B. {{ question.option2 }}
+                </label><br>
 
-        <p><a href="{{ url_for('logout') }}">Logout</a></p>
-    </div>
-</body>
-</html>
+                <label>
+                    <input type="radio" name="{{ question.id }}" value="C">
+                    C. {{ question.option3 }}
+                </label><br>
+
+                <label>
+                    <input type="radio" name="{{ question.id }}" value="D">
+                    D. {{ question.option4 }}
+                </label>
+            </div>
+        {% endfor %}
+
+        <button type="submit">Submit Quiz</button>
+    </form>
+</div>
+
+<script>
+const timerElement = document.getElementById("timer");
+const quizForm = document.getElementById("quizForm");
+
+let remaining = Number(timerElement.dataset.duration) * 60;
+
+function updateTimer() {
+    let minutes = Math.floor(remaining / 60);
+    let seconds = remaining % 60;
+
+    timerElement.textContent =
+        minutes + ":" + String(seconds).padStart(2, "0");
+
+    if (remaining <= 0) {
+        quizForm.submit();
+        return;
+    }
+
+    remaining--;
+}
+
+updateTimer();
+
+const timerInterval = setInterval(() => {
+    if (remaining <= 0) {
+        clearInterval(timerInterval);
+        return;
+    }
+
+    updateTimer();
+}, 1000);
+</script>

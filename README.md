@@ -1,122 +1,57 @@
 # Online Quiz Application
 
-## Project Description
-
-The Online Quiz Application is a simple web-based application developed using Python Flask and SQLite. It allows users to participate in quizzes, answer multiple-choice questions, and view their final scores.
-
-The main purpose of this project is to provide a simple and user-friendly platform for conducting online quizzes.
+## Project Overview
+The Online Quiz Application is a web-based application developed using Python Flask that allows students to take subject-wise quizzes and administrators to manage quiz content.
 
 ## Technologies Used
-
-- **Frontend:** HTML, CSS
-- **Backend:** Python, Flask
-- **Database:** SQLite
-- **Code Editor:** Visual Studio Code
+- Python
+- Flask
+- Flask-SQLAlchemy
+- SQLite
+- HTML
+- CSS
+- JavaScript
 
 ## Features
+- Student registration and login
+- Admin login
+- Role-based dashboards
+- Subject management
+- Quiz creation and management
+- MCQ question management
+- Quiz timer
+- Automatic score calculation
+- Student quiz history
+- Admin attempt monitoring
 
-- Simple and user-friendly interface.
-- Multiple-choice quiz questions.
-- Four options for each question.
-- Automatic score calculation.
-- Displays final quiz results.
-- Stores quiz questions in an SQLite database.
+## Installation
 
-## Project Structure
+1. Clone or download the project.
+2. Open the project folder in VS Code.
+3. Create a virtual environment:
 
-```text
-OnlineQuizApplication/
-│
-├── app.py
-├── requirements.txt
-├── quiz.db
-├── .gitignore
-│
-├── templates/
-│   ├── index.html
-│   ├── quiz.html
-│   └── result.html
-│
-└── static/
-    └── style.css
-```
+   `py -m venv venv`
 
-Note: The database file and virtual environment may be excluded from the GitHub repository using `.gitignore`.
+4. Activate the environment:
 
-## Installation and Setup
+   `.\venv\Scripts\Activate.ps1`
 
-### 1. Clone the Repository
+5. Install dependencies:
 
-```bash
-git clone https://github.com/Malfuse7281/OnlineQuizApplication.git
-```
+   `pip install -r requirements.txt`
 
-### 2. Open the Project Folder
+6. Create the admin account:
 
-```bash
-cd OnlineQuizApplication
-```
+   `python create_admin.py`
 
-### 3. Create a Virtual Environment
+7. Run the application:
 
-```bash
-python -m venv venv
-```
+   `python app.py`
 
-### 4. Activate the Virtual Environment
+8. Open `http://127.0.0.1:5000/` in your browser.
 
-For Windows:
+## Admin Account
+Demo admin credentials are created locally using `create_admin.py`. Change the default password before deployment.
 
-```bash
-venv\Scripts\activate
-```
-
-### 5. Install Required Packages
-
-```bash
-pip install -r requirements.txt
-```
-
-### 6. Run the Application
-
-```bash
-python app.py
-```
-
-### 7. Open in Browser
-
-Open your browser and visit:
-
-```text
-http://127.0.0.1:5000/
-```
-
-## How It Works
-
-1. The user opens the quiz application.
-2. The home page displays the quiz interface.
-3. The user starts the quiz.
-4. Multiple-choice questions are displayed.
-5. The user selects answers and submits the quiz.
-6. The application checks the answers and calculates the score.
-7. The final result is displayed to the user.
-
-## Learning Outcomes
-
-- Understanding Python Flask framework.
-- Learning basic frontend development using HTML and CSS.
-- Understanding SQLite database operations.
-- Connecting frontend pages with backend functionality.
-- Learning how to create and run a simple web application.
-
-## Author
-
-**Syed Malfuse**
-
-Integrated M.Tech – Software Engineering
-
-VIT-AP University
-
-## Project Status
-
-Completed – Academic Mini Project
+## Project Purpose
+This project demonstrates web development, database management, user authentication, role-based access, quiz management and automated result calculation.
